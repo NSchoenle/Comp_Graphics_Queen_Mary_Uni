@@ -24,8 +24,16 @@ public class PointVectorTest {
 		Vector3D res1 = v1.crossProduct(v1);
 		assertEquals(true,res1.x==0 &&res1.y ==0 && res1.z ==0);
 		Vector3D res2 = v3.crossProduct(v1);
-		assertEquals(true,res1.x==0 &&res1.y ==1 && res1.z ==0);
+		assertEquals(true,res2.x==0 &&res2.y ==1 && res2.z ==0);
 		Vector3D res3 = v3.crossProduct(v2);
-		assertEquals(true,res1.x==-1 &&res1.y ==0 && res1.z ==0);
+		assertEquals(true,res3.x==-1 &&res3.y ==0 && res3.z ==0);
+	}
+	
+	@Test
+	public void NormalizeTest() {
+		Vector3D v = new Vector3D(3,1,2);
+		assertEquals(v.x, 0.802, 0.01);
+		assertEquals(v.y,0.267, 0.01);
+		assertEquals(v.z,0.534, 0.01);
 	}
 }
