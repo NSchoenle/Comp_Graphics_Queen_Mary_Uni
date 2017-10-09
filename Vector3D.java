@@ -9,7 +9,7 @@ public class Vector3D implements Cloneable {
 	}
 
 	public String toString() {
-		return "Vector: (" + x + ", " + y + ", " + z + ")";
+		return x + " " + y + " " + z;
 	}
 
 	public Vector3D clone() throws CloneNotSupportedException {

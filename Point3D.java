@@ -14,6 +14,6 @@ public class Point3D {
 	}
 
 	public String toString(){
-                return "Point: ("+this.x+","+y+", "+z +")";
+                return this.x+" "+this.y+" "+ this.z;
         }
 }
