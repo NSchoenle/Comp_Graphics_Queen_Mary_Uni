@@ -45,8 +45,13 @@ public class GObject {
 		}
 		return ret;
 	}
-	
-	//Testing
+	//Not 100% sure on this one
+	public void transform (Matrix m) {
+		for (Point3D s : vertex) {
+			s.transform(m);
+		}
+	}
+	/*Testing
 	public static void main (String[] args) throws FileNotFoundException {
 		File f = new File("shapes/cube.dat");
 		System.out.println(f.getName());
@@ -77,4 +82,5 @@ public class GObject {
 		in.close();
 		System.out.println(obj1.toString());
 	}
+	*/
 }
