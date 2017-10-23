@@ -28,4 +28,8 @@ public class Scene
 	  }
 	  return ret;
   }
+  public void draw(Camera c, Graphics g){
+	  //STUB
+	  /*Back face elimination is required before drawing polygons*/
+  }
 }
