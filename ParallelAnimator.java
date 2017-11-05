@@ -5,7 +5,7 @@ import javax.swing.*;
 import static java.lang.Math.*;
 
 public class ParallelAnimator extends Animator {
-	private static final String[] files = { "./cube.dat", "./pyramid.dat" };
+	private static final String[] files = { "./cube.dat", "./pyramid.dat" }; //Ensure files are in proper dir
 
 	public ParallelAnimator(){
 		super();
