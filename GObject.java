@@ -10,16 +10,19 @@ public class GObject {
 		vertex = v;
 		face = f;
 	}
-
+	
 	public GObject(String fileName) throws FileNotFoundException {
 		Scanner in = new Scanner(new File(fileName));
+		//if the file is empty return
 		if (in.hasNext() == false) {
 			in.close();
 			return;
 			}
+		//create a new array of Point3D of the size specified
 		vertex = new Point3D[in.nextInt()];
 		for (int i = 0; i < vertex.length; i++) {
-			vertex[i] = new Point3D(in.nextInt(), in.nextInt(), in.nextInt());
+			//have to cast because files are given as doubles even though requires ints
+			vertex[i] = new Point3D((int)in.nextDouble(), (int)in.nextDouble(), (int) in.nextDouble());
 		}
 		face = new Face[in.nextInt()];
 		for (int j = 0; j < face.length; j++) {
@@ -36,28 +39,38 @@ public class GObject {
 		}
 		in.close();
 	}
-
+	/**
+	 * toString
+	 * Produces: a String representation of the GObject
+	 */
 	public String toString() {
-		String ret = "" + vertex.length + '\n';
-		for (int i = 0; i < vertex.length; i++) {
+		String ret = "" + vertex.length + '\n'; //number of verts
+		for (int i = 0; i < vertex.length; i++) { //verts listed one per line
 			ret += vertex[i].toString() + '\n';
 		}
-		ret += '\n' + '\n';
-		ret += face.length + '\n';
-		for (int j = 0; j < face.length; j++) {
+		ret += '\n' + '\n'; 
+		ret += face.length + '\n'; //number of faces
+		for (int j = 0; j < face.length; j++) { //faces as strings 1 per line
 			ret += face[j].toString() + '\n';
 		}
 		return ret;
 	}
 	//Not 100% sure on this one
+	/**
+	 * transform
+	 * Purpose: Transform an object by a matrix
+	 * @param m : the transformation matrix
+	 */
 	public void transform (Matrix m) {
 		for (Point3D s : vertex) {
 			s.transform(m);
 		}
 	}
-	/*Testing
+	/*Testing*/
 	public static void main (String[] args) throws FileNotFoundException {
-		File f = new File("shapes/cube.dat");
+		/*
+		File f = new File("src/cube.dat");
+		
 		System.out.println(f.getName());
 		System.out.println(f.getAbsolutePath());
 		Scanner in = new Scanner(f);
@@ -83,8 +96,11 @@ public class GObject {
 			face[j] = new Face(verts, c);
 		}
 		GObject obj1 = new GObject (vertex, face);
-		in.close();
+		in.close();*/
+		GObject obj1 = new GObject ("src/cube.dat");
 		System.out.println(obj1.toString());
+		GObject obj2 = new GObject ("src/pyramid.dat");
+		System.out.println(obj2.toString());
 	}
-	*/
+	
 }
