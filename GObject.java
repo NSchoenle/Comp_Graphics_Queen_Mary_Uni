@@ -3,8 +3,8 @@ import java.io.*;
 import java.awt.Color;
 
 public class GObject {
-	public Point3D[] vertex;
-	public Face[] face;
+	public Point3D[] vertex; //the vertexes of the object
+	public Face[] face; //the faces of the object
 
 	public GObject(Point3D[] v, Face[] f) {
 		vertex = v;
@@ -13,6 +13,10 @@ public class GObject {
 
 	public GObject(String fileName) throws FileNotFoundException {
 		Scanner in = new Scanner(new File(fileName));
+		if (in.hasNext() == false) {
+			in.close();
+			return;
+			}
 		vertex = new Point3D[in.nextInt()];
 		for (int i = 0; i < vertex.length; i++) {
 			vertex[i] = new Point3D(in.nextInt(), in.nextInt(), in.nextInt());

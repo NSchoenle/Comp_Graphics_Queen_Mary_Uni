@@ -26,8 +26,12 @@ public class Camera {
 	}
 	/*Check point Z coords
 	 * OVER-RIDDEN FOR PERSPECTIVE*/
+	/**
+	 * getVPN
+	 * Purpose: get the vector pointed towards the viewer
+	 * @return: the vector (0,0,1)
+	 */
 	public Vector3D getVPN() {
-		/* return a vector that points towards the viewer. Used for face orientation */
 		
 		/*
 		Point3D p1 = new Point3D (xmin,ymin,0);
@@ -42,6 +46,12 @@ public class Camera {
 
 	/*WORLD COORDS TO CAMERA COORDS 3D-3D 
 	 * WILL NOT BE OVER-RIDDEN BY PERSPECTIVIE*/
+	/**
+	 * cameraTransform
+	 * Transform the world coordinates into camera coordinates (3D-3D)
+	 * @param p: the point to be transformed
+	 * @return: a new point at the transformed coordinates
+	 */
 	protected Point3D cameraTransform(final Point3D p) {
 		Vector3D VPN = getVPN();
 		Vector3D VUP = new Vector3D (0,1,0); //FIX VUP WITH MORE GENERIC PARAMS?
@@ -80,6 +90,12 @@ public class Camera {
 	/*VERTS MAPPED TO POINTS IN VIEW PLANE 3D -2D
 	 * PROJECTED ONTO THE Z=0 PLANE
 	 * OVER RIDEDEN BY PERSPECTIVE*/
+	/**
+	 * projectionTransform
+	 * Purpose: transform the 3D point's coords to 2D point in view plane
+	 * @param p : the point to be transformed
+	 * @return : a new point at the transformed coordinates
+	 */
 	protected Point3D projectionTransform(final Point3D p) {
 		/*
 		Matrix t= new Matrix();
@@ -108,6 +124,12 @@ public class Camera {
 	
 	/*VIEW PLANE MAPPED TO SCREEN 2D-2D
 	 * NOT OVER-RIDDEN BY PERSPECTIVE*/
+	/**
+	 * viewportTransform
+	 * Purpose: map the point to the viewport specified by ax, bx, ay, and by
+	 * @param p: the point to be transformed
+	 * @return: the transformed point
+	 */
 	private final Point3D viewportTransform(final Point3D p) {
 		//USES aX aY bX bY VALUES
 		p.x = ax + bx*p.x;
@@ -122,6 +144,12 @@ public class Camera {
 	}
 	/*SET UP VIEWPORT
 	 * NOT OVER-RIDDEN BY PERSPECTIVE*/
+	/**
+	 * setViewport
+	 * Purpose: sets the viewport based on height and width specifications
+	 * @param width : an int
+	 * @param height : an int
+	 */
 	public void setViewport(int width, int height) {
 		/* calculate ax, bx, ay, by 
 		 * bX = dVx/dWx; aX = Vxmin - bX*Wxmin; 
@@ -134,7 +162,10 @@ public class Camera {
 		
 		
 	}
-
+	/**
+	 * toString
+	 * Produces a string representation of the Camera
+	 */
 	public String toString() {
 		return "" + xmin + " " + ymin + " " + xmax + " " + ymax + '\n' + ax + " " + bx + " " + ay + " " + by;
 	}
