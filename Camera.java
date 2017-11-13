@@ -41,7 +41,7 @@ public class Camera {
 		Vector3D v2 = new Vector3D(p3.x-p1.x,p3.y-p1.y, p3.z-p1.z);
 		return v1.crossProduct(v2);
 		*/
-		return new Vector3D (0,0,1);
+		return new Vector3D (0,0,1); //vpn IS Z AXIS
 	}
 
 	/*WORLD COORDS TO CAMERA COORDS 3D-3D 
@@ -54,7 +54,7 @@ public class Camera {
 	 */
 	protected Point3D cameraTransform(final Point3D p) {
 		Vector3D VPN = getVPN();
-		Vector3D VUP = new Vector3D (0,1,0); //FIX VUP WITH MORE GENERIC PARAMS?
+		Vector3D VUP = new Vector3D (0,1,0); 
 		Point3D VRP = new Point3D (0,0,0);/*FIX WITH MORE GENERAL POINT???*/
 		
 		Vector3D n = VPN;
@@ -92,7 +92,7 @@ public class Camera {
 	 * OVER RIDEDEN BY PERSPECTIVE*/
 	/**
 	 * projectionTransform
-	 * Purpose: transform the 3D point's coords to 2D point in view plane
+	 * Purpose: transform the 3D point's coords to 2D point in view plane (window)
 	 * @param p : the point to be transformed
 	 * @return : a new point at the transformed coordinates
 	 */
@@ -126,7 +126,8 @@ public class Camera {
 	 * NOT OVER-RIDDEN BY PERSPECTIVE*/
 	/**
 	 * viewportTransform
-	 * Purpose: map the point to the viewport specified by ax, bx, ay, and by
+	 * Purpose: map the point from the window to the 
+	 * 			viewport specified by ax, bx, ay, and by
 	 * @param p: the point to be transformed
 	 * @return: the transformed point
 	 */
@@ -136,12 +137,14 @@ public class Camera {
 		p.y = ay + by * p.y;
 		return p;
 	}
+	
 	/*Code for project given by instructors*/
 	public final Point3D project(final Point3D p) {
 		Point3D temp = cameraTransform(p);
 		temp = projectionTransform(temp);
 		return viewportTransform(temp);
 	}
+	
 	/*SET UP VIEWPORT
 	 * NOT OVER-RIDDEN BY PERSPECTIVE*/
 	/**

@@ -40,27 +40,6 @@ public class Scene {
 		return ret;
 	}
 
-	public static Vector3D faceNormal(Point3D p1, Point3D p2, Point3D p3) {
-		Vector3D v1 = new Vector3D(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
-		Vector3D v2 = new Vector3D(p3.x - p1.x, p3.y - p1.y, p3.z - p1.z);
-		return v1.crossProduct(v2);
-	}
-
-	/**
-	 * isFrontFace Purpose: determine if the face defined by 3 points (p1, p2, p3)
-	 * is facing the viewer
-	 * 
-	 * @param p1 : point 1
-	 * @param p2: point 2
-	 * @param p3: point 3
-	 * @param vpn: the view-plane normal
-	 * @return: if the normal of the face dotProduct with vpn >0 then front facing
-	 *          (return true) else return false
-	 */
-	public static boolean isFrontFace(Point3D p1, Point3D p2, Point3D p3, Vector3D vpn) {
-		return faceNormal(p1, p2, p3).dotProduct(vpn) > 0;
-	}
-
 	/**
 	 * draw Purpose: draw the scene using back face elimination
 	 * 
@@ -75,10 +54,13 @@ public class Scene {
 				Point3D[] verts = new Point3D[f.index.length];
 				for (int i = 0; i < f.index.length; i++) {
 					verts[i] = object.vertex[f.index[i]];
+					System.out.println(verts[i]);
 				}
-				if (isFrontFace(verts[0], verts[1], verts[2], c.getVPN())) {
+				System.out.println("");
+				if (Point3D.isFrontFace(verts[0], verts[1], verts[2], c.getVPN())) {
 					for (Point3D v : verts) {
 						v = c.project(v); // convert the vertices to projection coords
+						System.out.println(v);
 					}
 					int[] xs = new int[verts.length]; // x coords of polygon verts
 					int[] ys = new int[verts.length]; // y coords of polygon verts
@@ -86,7 +68,9 @@ public class Scene {
 						xs[j] = (int) verts[j].x;
 						ys[j] = (int) verts[j].y;
 					}
-					g.drawPolygon(xs, ys, 3); // figure out how to draw the polygon!!!!!!!!!!!!!!!
+					System.out.println("Time to draw the polygon " + f.toString());
+					g.fillPolygon(xs, ys, verts.length); // figure out how to draw the polygon!!!!!!!!!!!!!!!
+					System.out.println( "Polygon drawn");
 				}
 			}
 		}

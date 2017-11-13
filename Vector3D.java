@@ -10,8 +10,7 @@ public class Vector3D implements Cloneable {
 		this.w = 1;
 	}
 /**
- * Procedure: toString
- * Params: none
+ * toString
  * Purpose: Create a string for testing
  * Produces: a String of the form x y z
  */
@@ -19,8 +18,7 @@ public class Vector3D implements Cloneable {
 		return x + " " + y + " " + z;
 	}
 	/**
-	 * Procedure: clone
-	 * Params: none
+	 * clone
 	 * Purpose: Create a clone of the vector
 	 * Produces: a new vector with the same coordinates
 	 */
@@ -28,8 +26,7 @@ public class Vector3D implements Cloneable {
 		return new Vector3D(x, y, z);
 	}
 	/**
-	 * Procedure: L2norm
-	 * Params: none
+	 * L2norm
 	 * Purpose: Find the |v| where v is this
 	 * @return: a double of the value of |this|
 	 */
@@ -55,7 +52,6 @@ public class Vector3D implements Cloneable {
 		return new Vector3D(this.y * v.z - this.z * v.y, this.z * v.x - this.x * v.z, this.x * v.y - this.y * v.x);
 	}
 
-	//CHECK FOR ACCURACY
 	/**
 	 * normalize
 	 * Purpose: Normalize the vector

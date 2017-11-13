@@ -17,7 +17,8 @@ public class Face {
 		for (int i = 0; i<index.length; i++) {
 			ret+= index[i] + " ";
 		}
-		ret += '\n' +color.getRed() +" "+ color.getGreen() + " " + color.getBlue();
+		//ret += '\n';
+		ret += color.getRed() +" "+ color.getGreen() + " " + color.getBlue();
 		return ret;
 	}
 }

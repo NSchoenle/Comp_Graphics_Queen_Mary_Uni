@@ -48,8 +48,9 @@ public class GObject {
 		for (int i = 0; i < vertex.length; i++) { //verts listed one per line
 			ret += vertex[i].toString() + '\n';
 		}
-		ret += '\n' + '\n'; 
-		ret += face.length + '\n'; //number of faces
+		//ret += '\n';
+		ret += face.length; //number of faces
+		ret+= '\n';
 		for (int j = 0; j < face.length; j++) { //faces as strings 1 per line
 			ret += face[j].toString() + '\n';
 		}
