@@ -31,11 +31,10 @@ public class Point3D {
 		double ynew = 0;
 		double znew = 0;
 		
-		for (int i = 0; i<4; i++) {
-			xnew+= m.m[0][i];
-			ynew+= m.m[1][i];
-			znew += m.m[2][i];
-		}
+		xnew = m.m[0][0]*x+m.m[0][1]*y+m.m[0][2]*z;
+		ynew = m.m[1][0]*x+m.m[1][1]*y+m.m[1][2]*z;
+		znew = m.m[2][0]*x+m.m[2][1]*y+m.m[2][2]*z;
+		
 		return new Point3D(xnew,ynew,znew);
 	}
 	

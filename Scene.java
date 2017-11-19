@@ -21,7 +21,7 @@ public class Scene {
 	/**
 	 * transform Purpose: transform a scene of GObjects by a matrix
 	 * 
-	 * @param m: thetransformation matrix
+	 * @param m: the transformation matrix
 	 */
 	public void transform(Matrix m) {
 		for (GObject o : obj) {
@@ -54,21 +54,38 @@ public class Scene {
 				Point3D[] verts = new Point3D[f.index.length];
 				for (int i = 0; i < f.index.length; i++) {
 					verts[i] = object.vertex[f.index[i]];
-					System.out.println(verts[i]);
+					//System.out.println(verts[i]);
 				}
+				//TESTING PRINTS
+				if (verts.length == 0) {
+					System.out.println("NONE");
+				} else {
+					System.out.println(verts.length);
+					for (int x = 0; x < verts.length; x++) {
+						System.out.println(verts[x].toString());
+					}
+				}
+				//---------
 				System.out.println("");
 				if (Point3D.isFrontFace(verts[0], verts[1], verts[2], c.getVPN())) {
-					for (Point3D v : verts) {
-						v = c.project(v); // convert the vertices to projection coords
-						System.out.println(v);
+					for (int q = 0; q<verts.length;q++){
+					//	System.out.println(v);
+						verts[q] = c.project(verts[q]); // convert the vertices to projection coords
+					//	System.out.println(v);
 					}
+					
 					int[] xs = new int[verts.length]; // x coords of polygon verts
 					int[] ys = new int[verts.length]; // y coords of polygon verts
-					for (int j = 0; j > verts.length; j++) {
+					for (int j = 0; j < verts.length; j++) {
 						xs[j] = (int) verts[j].x;
 						ys[j] = (int) verts[j].y;
 					}
+					System.out.println("Verts to be drawn");
+					for (int k = 0; k<verts.length;k++){
+						System.out.println(xs[k]+ " " +ys[k]);
+					}
 					System.out.println("Time to draw the polygon " + f.toString());
+					g.setColor(f.color);
 					g.fillPolygon(xs, ys, verts.length); // figure out how to draw the polygon!!!!!!!!!!!!!!!
 					System.out.println( "Polygon drawn");
 				}

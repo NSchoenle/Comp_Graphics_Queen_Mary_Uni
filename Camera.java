@@ -32,20 +32,11 @@ public class Camera {
 	 * @return: the vector (0,0,1)
 	 */
 	public Vector3D getVPN() {
-		
-		/*
-		Point3D p1 = new Point3D (xmin,ymin,0);
-		Point3D p2 = new Point3D (xmax,ymin,0);
-		Point3D p3 = new Point3D (xmax,ymax,0);
-		Vector3D v1 = new Vector3D(p2.x-p1.x,p2.y-p1.y, p2.z-p1.z);
-		Vector3D v2 = new Vector3D(p3.x-p1.x,p3.y-p1.y, p3.z-p1.z);
-		return v1.crossProduct(v2);
-		*/
 		return new Vector3D (0,0,1); //vpn IS Z AXIS
 	}
 
 	/*WORLD COORDS TO CAMERA COORDS 3D-3D 
-	 * WILL NOT BE OVER-RIDDEN BY PERSPECTIVIE*/
+	 * OVER-RIDDEN BY PERSPECTIVIE*/
 	/**
 	 * cameraTransform
 	 * Transform the world coordinates into camera coordinates (3D-3D)
@@ -94,31 +85,9 @@ public class Camera {
 	 * projectionTransform
 	 * Purpose: transform the 3D point's coords to 2D point in view plane (window)
 	 * @param p : the point to be transformed
-	 * @return : a new point at the transformed coordinates
+	 * @return : the point at the transformed coordinates
 	 */
 	protected Point3D projectionTransform(final Point3D p) {
-		/*
-		Matrix t= new Matrix();
-		t.m[0][0] = 0;
-		t.m[0][1] = 0;
-		t.m[0][2] = 0;
-		t.m[0][3] = -(umax);
-		
-		t.m[1][0] = ;
-		t.m[1][1] = ;
-		t.m[1][2] = ;
-		t.m[1][3] = ;
-	
-		t.m[2][0] = ;
-		t.m[2][1] = ;
-		t.m[2][2] = ;
-		t.m[2][3] = ;
-	
-		t.m[3][0] = 0;
-		t.m[3][1] = 0;
-		t.m[3][2] = 0;
-		t.m[3][3] = 1;
-		*/
 		return p; //unsure if correct
 	}
 	
@@ -140,9 +109,13 @@ public class Camera {
 	
 	/*Code for project given by instructors*/
 	public final Point3D project(final Point3D p) {
+	//	System.out.println("Projecting point " +p.toString());
 		Point3D temp = cameraTransform(p);
+	//	System.out.println(temp.toString());
 		temp = projectionTransform(temp);
-		return viewportTransform(temp);
+	//	System.out.println(temp.toString());
+		temp = viewportTransform(temp);
+		return temp;
 	}
 	
 	/*SET UP VIEWPORT
