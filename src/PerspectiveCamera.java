@@ -86,7 +86,7 @@ public class PerspectiveCamera extends Camera {
 	
 		t.m[2][0] = 0;
 		t.m[2][1] = 0;
-		t.m[2][2] = 1;
+		t.m[2][2] = 0; //might need to be 1
 		t.m[2][3] = 0; 
 	
 		t.m[3][0] = 0;
