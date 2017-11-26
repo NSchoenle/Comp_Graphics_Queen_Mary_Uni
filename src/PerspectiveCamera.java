@@ -43,28 +43,45 @@ public class PerspectiveCamera extends Camera {
 		Vector3D v = vup;
 		Vector3D n = vpn;
 		
-		Matrix mat = new Matrix();
-		mat.m[0][0] = u.x;
-		mat.m[0][1] = u.y;
-		mat.m[0][2] = u.z;
-		mat.m[0][3] = -(u.x * vrp.x + u.y * vrp.y + u.z * vrp.z);
+		//Translate VRP to origin and rotate to get the view ref coords
+		Matrix m = new Matrix();
+		m.m[0][0] = u.x;
+		m.m[0][1] = u.y;
+		m.m[0][2] = u.z;
+		m.m[0][3] = -(u.x * vrp.x + u.y * vrp.y + u.z * vrp.z);
 		
-		mat.m[1][0] = v.x;
-		mat.m[1][1] = v.y;
-		mat.m[1][2] = v.z;
-		mat.m[1][3] = -(v.x * vrp.x + v.y * vrp.y + v.z * vrp.z);
+		m.m[1][0] = v.x;
+		m.m[1][1] = v.y;
+		m.m[1][2] = v.z;
+		m.m[1][3] = -(v.x * vrp.x + v.y * vrp.y + v.z * vrp.z);
 	
-		mat.m[2][0] = n.x;
-		mat.m[2][1] = n.y;
-		mat.m[2][2] = n.z;
-		mat.m[2][3] = -(n.x * vrp.x + n.y * vrp.y + n.z * vrp.z);
+		m.m[2][0] = n.x;
+		m.m[2][1] = n.y;
+		m.m[2][2] = n.z;
+		m.m[2][3] = -(n.x * vrp.x + n.y * vrp.y + n.z * vrp.z);
 	
-		mat.m[3][0] = 0;
-		mat.m[3][1] = 0;
-		mat.m[3][2] = 0;
-		mat.m[3][3] = 1;
+		m.m[3][0] = 0;
+		m.m[3][1] = 0;
+		m.m[3][2] = 0;
+		m.m[3][3] = 1;
 
-		return p.transform(mat);
+		//translate so COP is at origin
+		Matrix tCOP = new Matrix();
+		tCOP.setTranslation(cop.x,cop.y, cop.z);
+		
+		//Shear so center line of view vol is z axis
+		Matrix sh = new Matrix();
+		sh.m[0][2] = dop.x/dop.z;
+		sh.m[1][2] = dop.y/dop.z;
+		// Scale to canonical perspective view vol
+		/*Point3D _vrp = new Point3D(vrp.x,vrp.y,vrp.z);
+		_vrp.transform(tCOP).transform(sh);
+		Matrix s= new Matrix();
+		s.m[0][0] = (2*_vrp.z)/();
+		s.m[1][1] = ;
+		s.m[2][2] = ;
+		*/
+		return p.transform(sh.multiply(tCOP.multiply(m)));
 	}
 	
 	/**
@@ -86,16 +103,15 @@ public class PerspectiveCamera extends Camera {
 	
 		t.m[2][0] = 0;
 		t.m[2][1] = 0;
-		t.m[2][2] = 0; //might need to be 1
+		t.m[2][2] = 1; //might need to be 1
 		t.m[2][3] = 0; 
 	
 		t.m[3][0] = 0;
 		t.m[3][1] = 0;
-		t.m[3][2] = 1/cop.distance(new Point3D (0,0,0));
-		//not quite right needs to be distance from cop 
-		//to intersection of the line from cop to p and the plane
-		// version where the viewplane is shifted to z = 0;
-		t.m[3][3] = 1; 
+		//t.m[3][2] = 1/cop.distance(vrp); 
+		t.m[3][2] = -1; 
+		//unsure if correct
+		t.m[3][3] = 0; 
 
 		return p.transform(t);
 	} 

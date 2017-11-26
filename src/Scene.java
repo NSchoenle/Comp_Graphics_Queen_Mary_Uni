@@ -57,18 +57,6 @@ public class Scene {
 				for (int i = 0; i < f.index.length; i++) {
 					verts[i] = object.vertex[f.index[i]];
 				}
-			/*	//TESTING PRINTS
-				if (verts.length == 0) {
-					System.out.println("NONE");
-				} else {
-					System.out.println(verts.length);
-					for (int x = 0; x < verts.length; x++) {
-						System.out.println(verts[x].toString());
-					}
-				}
-				//---------
-				System.out.println("");
-				*/
 				if (Point3D.isFrontFace(verts[0], verts[1], verts[2], c.getVPN())) {
 					for (int q = 0; q<verts.length;q++){
 					//	System.out.println(v);
@@ -82,14 +70,17 @@ public class Scene {
 						xs[j] = (int) verts[j].x;
 						ys[j] = (int) verts[j].y;
 					}
+					/*
 					System.out.println("Verts to be drawn");
 					for (int k = 0; k<verts.length;k++){
 						System.out.println(xs[k]+ " " +ys[k]);
 					}
-					System.out.println("Time to draw the polygon " + f.toString());
+					*/
+					System.out.println("Time to draw the polygon " + f.color);
 					g.setColor(f.color);
-					g.fillPolygon(xs, ys, verts.length); // figure out how to draw the polygon!!!!!!!!!!!!!!!
+					g.fillPolygon(xs, ys, verts.length);
 					System.out.println( "Polygon drawn");
+					System.out.println("VPN is " + c.getVPN().toString());
 				}
 			}
 		}

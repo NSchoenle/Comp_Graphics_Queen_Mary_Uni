@@ -66,7 +66,8 @@ public class Point3D {
 	 * @param p3 : point 3
 	 * @param vpn : the view-plane normal
 	 * @return: if the normal of the face dotProduct with vpn >0
-	 * 			then front facing (return true) else return false
+	 * 			then front facing (return true)
+	 * 			else return false
 	 */
 	public static boolean isFrontFace(Point3D p1, Point3D p2, Point3D p3, Vector3D vpn){
 		return faceNormal(p1,p2,p3).dotProduct(vpn)>0; 
