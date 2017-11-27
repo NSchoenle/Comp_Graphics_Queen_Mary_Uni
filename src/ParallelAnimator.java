@@ -1,3 +1,4 @@
+//ParallelAnimator provided by instructors 2017
 import java.awt.*;
 import java.io.FileNotFoundException;
 
@@ -34,7 +35,6 @@ public class ParallelAnimator extends Animator {
 		mY.setRotationY(PI / 13);
 		mZ.setRotationZ(PI / 17);
 		scene.transform(mZ.multiply(mY.multiply(mX)));
-		System.out.println("Rotating scene");
 
 		scene.draw(camera, g);
 	}

@@ -1,3 +1,4 @@
+/*Animator provided by instructors 2017*/
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.BufferedImage;

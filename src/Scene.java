@@ -5,7 +5,7 @@ public class Scene {
 	private GObject[] obj; // the objects in the scene
 
 	/**
-	 * Scene const. 
+	 * Scene constructor 
 	 * Purpose: Creates a new scene from the objects in the given file array
 	 * 
 	 * @param fileName: an array of Strings (fileNames)
@@ -59,28 +59,18 @@ public class Scene {
 				}
 				if (Point3D.isFrontFace(verts[0], verts[1], verts[2], c.getVPN())) {
 					for (int q = 0; q<verts.length;q++){
-					//	System.out.println(v);
 						verts[q] = c.project(verts[q]); // convert the vertices to projection coords
-					//	System.out.println(v);
-					}
 					
+					}
 					int[] xs = new int[verts.length]; // x coords of polygon verts
 					int[] ys = new int[verts.length]; // y coords of polygon verts
 					for (int j = 0; j < verts.length; j++) {
 						xs[j] = (int) verts[j].x;
 						ys[j] = (int) verts[j].y;
 					}
-					/*
-					System.out.println("Verts to be drawn");
-					for (int k = 0; k<verts.length;k++){
-						System.out.println(xs[k]+ " " +ys[k]);
-					}
-					*/
-					System.out.println("Time to draw the polygon " + f.color);
 					g.setColor(f.color);
 					g.fillPolygon(xs, ys, verts.length);
-					System.out.println( "Polygon drawn");
-					System.out.println("VPN is " + c.getVPN().toString());
+					
 				}
 			}
 		}

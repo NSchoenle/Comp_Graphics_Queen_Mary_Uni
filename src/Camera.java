@@ -1,13 +1,8 @@
-/*THIS IS A COURSEWORK PROGRAM. TEST IT WELL
- * 
- * THIS IS FOR THE ORTHOGRAPHIC PARALLEL PROJECTION.(DOP AND VPN AND COORD AXIS ARE ALL SAME) 
- * THE PERSPECTIVE WILL BE A SUBCLASS THAT OVERWRITES THESE METHODS
- */
 public class Camera {
 	/*Camera attributes given by instructors*/
 	
 	private double xmin, xmax, ymin, ymax; // USED FOR CAMERA WINDOW
-	private double fcp, bcp; // NOT USED: front & back clippling planes
+	private double fcp, bcp; // NOT USED: front & back clipping planes
 	private double ax, bx, ay, by; //USED FOR VIEWPORT 
 	
 	public Camera(double xmin_, double xmax_, double ymin_, double ymax_) {
@@ -24,8 +19,7 @@ public class Camera {
 		ay = 0;
 		by = 0;
 	}
-	/*Check point Z coords
-	 * OVER-RIDDEN FOR PERSPECTIVE*/
+	//OVER-RIDDEN FOR PERSPECTIVE
 	/**
 	 * getVPN
 	 * Purpose: get the vector pointed towards the viewer
@@ -109,11 +103,8 @@ public class Camera {
 	
 	/*Code for project given by instructors*/
 	public final Point3D project(final Point3D p) {
-	//	System.out.println("Projecting point " +p.toString());
 		Point3D temp = cameraTransform(p);
-	//	System.out.println(temp.toString());
 		temp = projectionTransform(temp);
-	//	System.out.println(temp.toString());
 		temp = viewportTransform(temp);
 		return temp;
 	}

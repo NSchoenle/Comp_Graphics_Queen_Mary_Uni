@@ -1,8 +1,7 @@
 import static java.lang.Math.*;
+
 public class Vector3D implements Cloneable {
 	public double x, y, z, w; //the coordinates of the vector
-	
-	//may need to do something about the w and homogeneous coords
 	public Vector3D(double X, double Y, double Z) {
 		this.x = X;
 		this.y = Y;
