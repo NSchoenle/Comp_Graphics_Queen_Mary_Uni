@@ -70,6 +70,8 @@ public class Scene {
 					}
 					g.setColor(f.color);
 					g.fillPolygon(xs, ys, verts.length);
+					g.setColor(Color.black);
+					g.drawPolyline(xs, ys,verts.length);
 					
 				}
 			}

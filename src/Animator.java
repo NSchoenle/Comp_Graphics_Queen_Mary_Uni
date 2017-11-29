@@ -4,14 +4,19 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 
 public class Animator extends JFrame {
+	private static final int WIDTH = 400;
+	private static final int HEIGHT = 300;
+	private static final int INTERVAL = 100;
+	private BufferedImage image;
+	 
 	public Animator() {
 		setSize(WIDTH, HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
 
+	
 	private int R;
-
 	protected void animate(Graphics g) {
 		g.setColor(Color.RED);
 		R = R > 20 ? 0 : R + 1;
@@ -39,12 +44,6 @@ public class Animator extends JFrame {
 
 	public final void paint(Graphics g) {
 	}
-
-	private static final int WIDTH = 400;
-	private static final int HEIGHT = 300;
-	private static final int INTERVAL = 100;
-	private BufferedImage image;
-
 	public static void main(String[] args) {
 		new Animator().loop();
 	}
